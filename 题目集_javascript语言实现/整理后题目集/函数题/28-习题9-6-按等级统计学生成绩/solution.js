@@ -1,0 +1,4 @@
+'use strict';
+function set_grade(student, n) { let failed = 0; for (let i = 0; i < n; i++) { const score = student[i].score; student[i].grade = score >= 85 ? 'A' : score >= 70 ? 'B' : score >= 60 ? 'C' : 'D'; if (score < 60) failed++; } return failed; }
+module.exports = { set_grade };
+if (require.main === module) { const lines = require('fs').readFileSync(0, 'utf8').trim().split(/\n/), n = Number(lines[0]), students = lines.slice(1, n + 1).map(line => { const p = line.trim().split(/\s+/); return {num: p[0], name: p[1], score: Number(p[2])}; }); const failed = set_grade(students, n); console.log('The count for failed (<60): ' + failed + '\nThe grades:\n' + students.map(x => x.num + ' ' + x.name + ' ' + x.grade).join('\n')); }
